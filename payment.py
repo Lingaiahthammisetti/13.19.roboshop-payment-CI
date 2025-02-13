@@ -143,6 +143,7 @@ def countItems(items):
 # Initialize RabbitMQ publisher
 publisher = Publisher(app.logger)
 
+
 if __name__ == "__main__":
     sh = logging.StreamHandler(sys.stdout)
     sh.setLevel(logging.INFO)
