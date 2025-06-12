@@ -14,6 +14,18 @@ from rabbitmq import Publisher
 import prometheus_client
 from prometheus_client import Counter, Histogram
 
+from urllib.parse import urlparse
+
+def sanitize_host(host):
+    if host.startswith('tcp://'):
+        return host.replace('tcp://', '')
+    elif '://' in host:
+        return urlparse(host).hostname or host
+    return host
+
+USER = sanitize_host(os.getenv('USER_HOST', 'user'))
+
+
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
 
